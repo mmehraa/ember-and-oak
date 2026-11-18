@@ -1,0 +1,41 @@
+---
+import { site } from '../data/site';
+const links = [['Story', '#story'], ['Dishes', '#dishes'], ['Menu', '#menu'], ['Visit', '#reserve']];
+---
+<header id="top-bar" class="fixed inset-x-0 top-0 z-50 mix-blend-difference">
+  <div class="mx-auto flex max-w-[1600px] items-center justify-between px-4 py-5 sm:px-8">
+    <a href="#" class="font-display text-2xl tracking-tight">{site.name}</a>
+    <nav class="hidden items-center gap-10 text-sm md:flex">
+      {links.map(([label, href]) => (
+        <a href={href} class="group relative overflow-hidden">
+          <span class="block transition-transform duration-500 group-hover:-translate-y-full">{label}</span>
+          <span class="absolute inset-0 translate-y-full italic transition-transform duration-500 group-hover:translate-y-0">{label}</span>
+        </a>
+      ))}
+    </nav>
+    <button id="menu-toggle" class="p-2 md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<nav id="mobile-nav" class="fixed inset-0 z-[60] hidden flex-col justify-center gap-2 bg-ember px-6 text-char md:hidden">
+  <button id="menu-close" class="absolute right-4 top-4 p-2" aria-label="Close menu">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  {links.map(([label, href]) => <a href={href} class="font-display text-6xl">{label}</a>)}
+  <p class="mt-10 text-sm">{site.address}<br />{site.phone}</p>
+</nav>
+
+<script>
+  const nav = document.getElementById('mobile-nav')!;
+  const toggle = document.getElementById('menu-toggle')!;
+  const setOpen = (open: boolean) => {
+    nav.classList.toggle('hidden', !open);
+    nav.classList.toggle('flex', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  };
+  toggle.addEventListener('click', () => setOpen(true));
+  document.getElementById('menu-close')!.addEventListener('click', () => setOpen(false));
+  nav.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+</script>

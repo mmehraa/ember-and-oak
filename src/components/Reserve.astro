@@ -1,0 +1,40 @@
+---
+import { site } from '../data/site';
+const times = ['5:00 pm', '5:30 pm', '6:00 pm', '6:30 pm', '7:00 pm', '7:30 pm', '8:00 pm', '8:30 pm', '9:00 pm'];
+const field = 'mt-2 w-full border-0 border-b border-cream/25 bg-transparent px-0 py-3 text-lg text-cream outline-none transition-colors focus:border-ember';
+---
+<section id="reserve" class="mx-auto grid max-w-[1600px] gap-16 px-4 py-28 sm:px-8 md:py-44 lg:grid-cols-12">
+  <div class="lg:col-span-7">
+    <p class="eyebrow" data-fade>(05) Reservations</p>
+    <h2 data-split class="mt-6 font-display text-6xl font-light leading-[0.95] sm:text-8xl">Save your seat<br /><span class="italic text-wheat">by the fire.</span></h2>
+
+    <form id="reserve-form" class="mt-14 grid gap-x-8 gap-y-8 sm:grid-cols-2" data-fade>
+      <label class="text-xs uppercase tracking-widest text-cream/60">Date<input required type="date" name="date" class={field} /></label>
+      <label class="text-xs uppercase tracking-widest text-cream/60">Time
+        <select required name="time" class={field}>{times.map((t) => <option class="bg-char">{t}</option>)}</select>
+      </label>
+      <label class="text-xs uppercase tracking-widest text-cream/60">Guests
+        <select name="guests" class={field}>{[1, 2, 3, 4, 5, 6, 7, 8].map((n) => <option class="bg-char" selected={n === 2}>{n}</option>)}</select>
+      </label>
+      <label class="text-xs uppercase tracking-widest text-cream/60">Name<input required name="name" autocomplete="name" class={field} /></label>
+      <label class="text-xs uppercase tracking-widest text-cream/60 sm:col-span-2">Email<input required type="email" name="email" autocomplete="email" class={field} /></label>
+      <label class="text-xs uppercase tracking-widest text-cream/60 sm:col-span-2">Notes (optional)<textarea name="notes" rows="2" class={field} placeholder="Allergies, celebrations, high chair…"></textarea></label>
+      <div class="sm:col-span-2"><button class="btn-primary !px-10 !py-5 text-base" data-magnetic>Request booking →</button></div>
+      <p id="reserve-ok" role="status" class="hidden rounded-xl bg-ember/15 p-5 text-wheat sm:col-span-2"></p>
+    </form>
+  </div>
+
+  <aside class="lg:col-span-4 lg:col-start-9" data-fade>
+    <div class="rounded-[2rem] bg-bark p-8 sm:p-10">
+      <h3 class="font-display text-3xl font-light">Visit us</h3>
+      <p class="mt-4 text-cream/70">{site.address}</p>
+      <p class="mt-1"><a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`} class="text-wheat hover:underline">{site.phone}</a></p>
+      <h3 class="mt-10 font-display text-3xl font-light">Hours</h3>
+      <dl class="mt-4 space-y-3 text-sm">
+        {site.hours.map(([d, h]) => <div class="flex justify-between border-b border-cream/10 pb-3"><dt class="text-cream/65">{d}</dt><dd>{h}</dd></div>)}
+      </dl>
+      <iframe title="Map to Ember & Oak" loading="lazy" class="mt-10 h-56 w-full rounded-2xl opacity-80 grayscale invert-[.9]"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-122.69%2C45.51%2C-122.66%2C45.53&layer=mapnik"></iframe>
+    </div>
+  </aside>
+</section>

@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props { title?: string; description?: string }
+const {
+  title = `${site.name} | ${site.tagline}`,
+  description = 'Wood-fired pizza, handmade pasta and ember-grilled meats in Portland. Book your table online.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1d1410" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script is:inline>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js');
+    </script>
+    <!-- Local SEO: tells Google this is a restaurant with an address and reservations -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Restaurant',
+      name: site.name,
+      servesCuisine: 'Italian',
+      telephone: site.phone,
+      address: site.address,
+      acceptsReservations: true,
+    })} />
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div id="loader" class="fixed inset-0 z-[100] bg-ember text-char" style="clip-path: inset(0 0 0 0)">
+      <div class="loader-inner flex h-full flex-col justify-between p-5 sm:p-10">
+        <p class="text-xs font-semibold uppercase tracking-[0.3em]">{site.tagline} · Portland</p>
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="overflow-hidden font-display text-[13vw] leading-none sm:text-[9vw]"><span class="loader-word inline-block">Ember &amp; Oak</span></h2>
+          <span id="loader-count" class="font-display text-[13vw] leading-none tabular-nums sm:text-[9vw]">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom cursor (desktop only) -->
+    <div id="cursor" class="hidden" aria-hidden="true">
+      <div class="cursor-ring z-[95]"><span class="cursor-label"></span></div>
+      <div class="cursor-dot z-[96]"></div>
+    </div>
+
+    <div class="grain" aria-hidden="true"></div>
+    <slot />
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>

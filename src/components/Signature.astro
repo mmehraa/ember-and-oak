@@ -1,0 +1,39 @@
+---
+import { img, signature } from '../data/site';
+---
+<section id="dishes" class="relative bg-bark">
+  <div id="dishes-wrap" class="relative flex min-h-[100svh] flex-col justify-center overflow-hidden py-20 md:h-[100svh] md:py-0">
+    <div id="dishes-track" class="flex snap-x snap-mandatory scroll-px-4 gap-6 overflow-x-auto px-4 pb-6 sm:scroll-px-8 [scrollbar-width:none] sm:px-8 md:w-max md:snap-none md:gap-10 md:overflow-visible md:pb-0">
+      <div class="flex w-[85vw] shrink-0 snap-start flex-col justify-center md:w-[38vw] md:pr-10">
+        <p class="eyebrow">(02) From the oven</p>
+        <h2 data-split class="mt-6 font-display text-6xl font-light leading-[0.95] md:text-[6vw]">Signature <span class="italic text-wheat">dishes</span></h2>
+        <p class="mt-8 max-w-sm text-cream/65">Five plates our regulars come back for. Keep scrolling. The kitchen is just getting started.</p>
+        <p class="mt-10 hidden items-center gap-3 text-xs uppercase tracking-[0.3em] text-cream/50 md:flex">Scroll <span class="text-ember">→</span></p>
+      </div>
+
+      {signature.map((d, i) => (
+        <article class="dish-card group w-[80vw] shrink-0 snap-start md:w-[30vw]" data-cursor="Taste">
+          <div class="relative h-[52svh] overflow-hidden rounded-[2rem] md:h-[62svh]">
+            <img src={img(d.img, 1000)} alt={d.name} loading="lazy"
+                 class="dish-img absolute inset-y-0 -left-[10%] h-full w-[120%] max-w-none object-cover transition-[filter] duration-700 group-hover:saturate-150" />
+            <span class="absolute left-5 top-4 font-display text-7xl font-light text-cream/90 drop-shadow-lg">0{i + 1}</span>
+          </div>
+          <div class="mt-5 flex items-baseline justify-between gap-4">
+            <h3 class="font-display text-2xl sm:text-3xl">{d.name}</h3>
+            <span class="font-semibold text-ember">${d.price}</span>
+          </div>
+          <p class="mt-2 max-w-sm text-sm text-cream/60">{d.note}</p>
+        </article>
+      ))}
+
+      <a href="#menu" class="group flex w-[70vw] shrink-0 snap-start flex-col items-center justify-center gap-6 rounded-[2rem] border border-cream/15 text-center md:w-[26vw]" data-cursor="Menu">
+        <span class="font-display text-5xl font-light italic sm:text-6xl">Hungry yet?</span>
+        <span class="btn-primary">See the full menu</span>
+      </a>
+    </div>
+
+    <div class="absolute bottom-8 left-8 right-8 hidden h-px bg-cream/15 md:block">
+      <div id="dishes-progress" class="h-full origin-left scale-x-0 bg-ember"></div>
+    </div>
+  </div>
+</section>

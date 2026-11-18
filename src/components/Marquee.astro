@@ -1,0 +1,18 @@
+---
+const words = ['Wood-fired pizza', 'Handmade pasta', 'Natural wine', 'Ember-grilled meats', 'Seasonal produce'];
+const Row = words.flatMap((w, i) => [{ w, outline: i % 2 === 1 }]);
+---
+<section class="overflow-hidden border-y border-cream/10 bg-char py-6 sm:py-10" aria-label="What we do">
+  <div class="marquee-track flex w-max will-change-transform">
+    {[0, 1].map((copy) => (
+      <div class="flex shrink-0 items-center" aria-hidden={copy === 1 ? 'true' : undefined}>
+        {Row.map(({ w, outline }) => (
+          <>
+            <span class:list={['whitespace-nowrap px-6 font-display text-5xl font-light italic sm:px-10 sm:text-8xl', outline ? 'text-outline text-wheat' : 'text-cream']}>{w}</span>
+            <svg viewBox="0 0 24 24" class="h-8 w-8 shrink-0 fill-ember sm:h-12 sm:w-12" aria-hidden="true"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z" /></svg>
+          </>
+        ))}
+      </div>
+    ))}
+  </div>
+</section>

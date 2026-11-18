@@ -1,0 +1,36 @@
+---
+import { img } from '../data/site';
+const stats = [{ n: 9, s: '', l: 'Years by the fire' }, { n: 900, s: '°', l: 'Oven heat (°F)' }, { n: 40, s: '+', l: 'Italian wines' }];
+---
+<section id="story" class="mx-auto max-w-[1600px] px-4 py-28 sm:px-8 md:py-44">
+  <p class="eyebrow" data-fade>(01) Our story</p>
+  <p data-scrub class="mt-8 max-w-6xl font-display text-[8.5vw] font-light leading-[1.08] tracking-tight sm:text-[5.2vw]">
+    A small room built around one big fire. We buy from farms within a hundred miles, mill our own semolina, and change the
+    menu whenever the market does. <span class="italic text-ember">Simple food, cooked over real wood.</span>
+  </p>
+
+  <div class="mt-24 grid items-end gap-12 md:mt-36 md:grid-cols-12">
+    <figure class="relative md:col-span-5" data-cursor="Chef">
+      <div data-clip class="aspect-[4/5] overflow-hidden rounded-[2rem]">
+        <img data-parallax src={img('1577219491135-ce391730fb2c', 1100)} alt="Head chef Marco Bellini plating a dish" loading="lazy"
+             class="h-[124%] w-full object-cover" />
+      </div>
+      <figcaption class="mt-4 flex justify-between text-sm text-cream/60"><span>Chef Marco Bellini</span><span>Naples → Portland</span></figcaption>
+    </figure>
+
+    <div class="md:col-span-6 md:col-start-7">
+      <p data-fade class="max-w-lg text-lg text-cream/75">
+        Ember &amp; Oak began with a secondhand oven and a stubborn idea: that the best Italian food is simple, seasonal and
+        cooked over real wood. Nine years on, the oven is the same. The queue is a little longer.
+      </p>
+      <dl class="mt-14 grid grid-cols-3 gap-6 border-t border-cream/15 pt-10">
+        {stats.map((st) => (
+          <div data-fade>
+            <dt class="font-display text-5xl font-light text-wheat sm:text-7xl" data-count={st.n} data-suffix={st.s}>{st.n}{st.s}</dt>
+            <dd class="mt-2 text-xs uppercase tracking-widest text-cream/50">{st.l}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>

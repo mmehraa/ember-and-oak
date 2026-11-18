@@ -1,0 +1,40 @@
+---
+import { img, menu } from '../data/site';
+const tabs = Object.keys(menu);
+const followImgs = [...new Set(Object.values(menu).flat().map((i) => i.img).filter(Boolean))] as string[];
+---
+<section id="menu" class="mx-auto max-w-[1600px] px-4 py-28 sm:px-8 md:py-44">
+  <div class="flex flex-wrap items-end justify-between gap-10">
+    <div>
+      <p class="eyebrow" data-fade>(03) The menu</p>
+      <h2 data-split class="mt-6 font-display text-6xl font-light leading-[0.95] sm:text-8xl">Seasonal, simple,<br /><span class="italic text-wheat">cooked over oak.</span></h2>
+    </div>
+    <div role="tablist" aria-label="Menu sections" class="flex flex-wrap gap-2" data-fade>
+      {tabs.map((t, i) => (
+        <button role="tab" id={`tab-${i}`} aria-controls={`panel-${i}`} aria-selected={i === 0 ? 'true' : 'false'}
+                class="menu-tab rounded-full border border-cream/20 px-5 py-2.5 text-sm transition-colors hover:border-cream aria-selected:border-ember aria-selected:bg-ember">
+          {t}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {tabs.map((t, i) => (
+    <div role="tabpanel" id={`panel-${i}`} aria-labelledby={`tab-${i}`} class:list={['menu-panel mt-16 border-t border-cream/15', { hidden: i !== 0 }]}>
+      {menu[t].map((item) => (
+        <div class="menu-row group grid grid-cols-[1fr_auto] items-baseline gap-x-6 border-b border-cream/15 py-6 sm:py-8"
+             data-menu-img={item.img ? img(item.img, 600) : undefined}>
+          <h3 class="font-display text-3xl font-light transition-all duration-500 group-hover:translate-x-4 group-hover:italic group-hover:text-ember sm:text-5xl">{item.name}</h3>
+          <span class="font-display text-2xl text-wheat sm:text-4xl">${item.price}</span>
+          <p class="mt-2 text-sm text-cream/55 transition-transform duration-500 group-hover:translate-x-4">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  ))}
+  <p class="mt-12 text-xs text-cream/45">Vegetarian and gluten-free options available. Please tell us about any allergies.</p>
+
+  <!-- Floating preview image that follows the cursor over menu rows (desktop) -->
+  <div id="menu-follow" class="pointer-events-none fixed left-0 top-0 z-40 hidden aspect-[3/4] w-60 overflow-hidden rounded-2xl opacity-0 shadow-2xl md:block" aria-hidden="true">
+    {followImgs.map((id) => <img src={img(id, 600)} data-src={img(id, 600)} alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover opacity-0" />)}
+  </div>
+</section>

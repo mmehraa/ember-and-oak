@@ -1,0 +1,44 @@
+---
+import { site } from '../data/site';
+const badge = 'Reserve a table · Reserve a table · ';
+---
+<section id="hero" class="relative h-[100svh] min-h-[600px] overflow-hidden bg-[radial-gradient(ellipse_at_80%_100%,#7a2a1a,#1d1410_60%)]">
+  <canvas id="embers" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+  <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-char/70 via-transparent to-transparent"></div>
+
+  <div class="hero-inner relative z-10 mx-auto flex h-full max-w-[1600px] flex-col justify-end px-4 pb-8 sm:px-8 sm:pb-12">
+    <p class="hero-fade eyebrow">Est. 2016 · Portland, Oregon</p>
+    <h1 data-hero-title class="mt-5 font-display text-[16vw] font-light leading-[0.88] tracking-[-0.03em] sm:text-[10.5vw]">
+      <span class="block">Fire, flour</span>
+      <span class="block italic text-wheat sm:pl-[9vw]">&amp; slow<br class="sm:hidden" /> evenings</span>
+    </h1>
+    <div class="mt-8 flex flex-wrap items-end justify-between gap-6 sm:mt-10">
+      <p class="hero-fade max-w-sm text-cream/75">
+        {site.tagline}. A 900° oak oven, pasta rolled by hand every morning, and a wine list built for long dinners.
+      </p>
+      <div class="hero-fade flex flex-wrap gap-3">
+        <a href="#reserve" class="btn-primary" data-magnetic>Reserve a table</a>
+        <a href="#menu" class="btn-ghost" data-magnetic>The menu</a>
+      </div>
+    </div>
+  </div>
+
+  <a href="#reserve" class="hero-fade absolute right-4 top-24 z-10 block h-28 w-28 sm:right-10 sm:top-28 sm:h-36 sm:w-36" data-cursor="Book" aria-label="Reserve a table">
+    <svg viewBox="0 0 100 100" class="spin h-full w-full" aria-hidden="true">
+      <defs><path id="circle" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" /></defs>
+      <text class="fill-cream text-[9.2px] uppercase tracking-[0.22em]"><textPath href="#circle">{badge}</textPath></text>
+    </svg>
+    <svg viewBox="0 0 24 24" class="absolute inset-0 m-auto h-8 w-8 fill-ember" aria-hidden="true">
+      <path d="M12 2c1 3.5-1.5 5-1.5 8 0 1.4 1 2.5 2.3 2.5 1.5 0 2.2-1.2 2.2-2.6 2 1.6 3 3.8 3 6.1 0 3.5-2.7 6-6 6s-6-2.5-6-6c0-5 6-7.5 6-14z" />
+    </svg>
+  </a>
+
+  <div class="hero-fade absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-cream/60 lg:flex">
+    Scroll
+    <span class="block h-12 w-px overflow-hidden bg-cream/20"><span class="block h-1/2 w-full animate-[drip_1.8s_ease-in-out_infinite] bg-cream"></span></span>
+  </div>
+</section>
+
+<style>
+  @keyframes drip { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }
+</style>

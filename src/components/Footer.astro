@@ -1,0 +1,13 @@
+---
+import { site } from '../data/site';
+---
+<footer class="relative overflow-hidden border-t border-cream/10 pt-20">
+  <div class="mx-auto grid max-w-[1600px] gap-10 px-4 text-sm text-cream/60 sm:grid-cols-2 sm:px-8 lg:grid-cols-4">
+    <div><p class="eyebrow mb-4">Address</p><p>{site.address}</p></div>
+    <div><p class="eyebrow mb-4">Contact</p><p><a href={`mailto:${site.email}`} class="hover:text-cream">{site.email}</a><br />{site.phone}</p></div>
+    <div><p class="eyebrow mb-4">Follow</p><p class="flex gap-4"><a href="#" class="hover:text-cream">Instagram</a><a href="#" class="hover:text-cream">TikTok</a></p></div>
+    <div class="lg:text-right"><a href="#" class="hover:text-cream">Back to top ↑</a></div>
+  </div>
+  <p data-big class="molten mt-16 whitespace-nowrap text-center font-display text-[17vw] font-light italic leading-[0.8] tracking-tighter" aria-hidden="true">Ember&amp;Oak</p>
+  <p class="mx-auto max-w-[1600px] px-4 py-6 text-xs text-cream/40 sm:px-8">© {new Date().getFullYear()} {site.name}. A portfolio concept. Photos from Unsplash.</p>
+</footer>

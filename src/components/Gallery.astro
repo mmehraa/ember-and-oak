@@ -1,0 +1,29 @@
+---
+import { gallery, img } from '../data/site';
+// Size and offset of each photo before zooming. The first is centred and grows to fill the screen.
+const frames = [
+  'w-[25vw] h-[25vh]',
+  'w-[35vw] h-[30vh] -top-[30vh] left-[5vw]',
+  'w-[20vw] h-[45vh] -top-[10vh] -left-[25vw]',
+  'w-[25vw] h-[25vh] left-[27.5vw]',
+  'w-[20vw] h-[25vh] top-[27.5vh] left-[5vw]',
+  'w-[30vw] h-[25vh] top-[27.5vh] -left-[22.5vw]',
+  'w-[15vw] h-[15vh] top-[22.5vh] left-[25vw]',
+];
+---
+<section id="gallery" class="relative h-[320vh] bg-char">
+  <div class="sticky top-0 h-[100svh] overflow-hidden">
+    {gallery.map((id, i) => (
+      <div class="zoom-item absolute inset-0 flex items-center justify-center will-change-transform">
+        <div class:list={['relative overflow-hidden', frames[i]]}>
+          <img src={img(id, i === 0 ? 2000 : 900)} alt={i === 0 ? 'The dining room at Ember & Oak' : ''} loading="lazy" class="h-full w-full object-cover" />
+        </div>
+      </div>
+    ))}
+    <div class="zoom-shade absolute inset-0 bg-char/55 opacity-0"></div>
+    <div class="zoom-text absolute inset-0 flex flex-col items-center justify-center px-4 text-center opacity-0">
+      <p class="eyebrow">(04) The room</p>
+      <h2 class="mt-6 font-display text-6xl font-light leading-[0.95] sm:text-9xl">Come for dinner.<br /><span class="italic text-wheat">Stay for the room.</span></h2>
+    </div>
+  </div>
+</section>
